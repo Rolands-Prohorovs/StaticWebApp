@@ -47,11 +47,7 @@ function App() {
     <>
       <Header />
       <main>
-        {/* Show error if there's one */}
-        {error && <div className="error">{error}</div>}
-  
-        {/* Show chart or loading state */}
-        {!error && data ? (
+        
           <Chart
             chartType="LineChart"
             width="800px"
@@ -59,9 +55,7 @@ function App() {
             data={chartData}
             options={options}
           />
-        ) : (
-          !error && <div>Loading...</div>
-        )}
+       
       </main>
       <Footer />
     </>
