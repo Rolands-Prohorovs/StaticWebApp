@@ -9,9 +9,17 @@ function App() {
 
   useEffect(() => {
     fetch('https://rolands-web-app.azurewebsites.net/temp')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('API error');
+        }
+        return response.json();
+      })
       .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setError('Could not load temperature data. Please try again later.');
+      });
   }, []);
 
   const chartData = [
@@ -39,7 +47,11 @@ function App() {
     <>
       <Header />
       <main>
-        {data ? (
+        {/* Show error if there's one */}
+        {error && <div className="error">{error}</div>}
+  
+        {/* Show chart or loading state */}
+        {!error && data ? (
           <Chart
             chartType="LineChart"
             width="800px"
@@ -48,7 +60,7 @@ function App() {
             options={options}
           />
         ) : (
-          <div>Loading...</div>
+          !error && <div>Loading...</div>
         )}
       </main>
       <Footer />
