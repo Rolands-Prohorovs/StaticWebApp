@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('loads both temperature and humidity charts with data', async ({ page }) => {
   // Visit the deployed site
-  await page.goto('https://gray-sand-0447b8403.6.azurestaticapps.net/');
+  await page.goto('https://lemon-sky-096314203.6.azurestaticapps.net/');
 
   // ✅ Check temperature chart
   await expect(page.getByText('Temperature Over Entries')).toBeVisible();
